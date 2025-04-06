@@ -7,6 +7,11 @@ WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
+# docker compose specify local nuget package repo
+# https://stackoverflow.com/questions/52770960/how-to-use-local-nuget-package-sources-for-dockerfile-dotnet-restore
+# https://stackoverflow.com/questions/48821991/dockerfile-cant-see-local-file-or-private-nuget-server
+# https://medium.com/@cwoolum/using-nuget-restore-securely-inside-of-docker-containers-with-caching-2c2f5453905d
+
 
 # This stage is used to build the service project
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build

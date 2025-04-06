@@ -1,9 +1,4 @@
-﻿using KofCSDK;
-using KofCSDK.Models.Requests;
-using KofCSDK.Models.Responses;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Net;
 using Yarp.ReverseProxy.Forwarder;
 
@@ -44,55 +39,5 @@ public static class ApiProxyExtensions
                 var exception = errorFeature.Exception;
             }
         });
-    }
-
-    public static void MapApiNuget(this WebApplication app)
-    {
-        app.MapPost("nuget/api/{tenantId}/accounts/login", async (
-            [FromRoute]string tenantId,
-            [FromBody]LoginRequest loginRequest,
-            IKofCV1Client  kofcV1Client) =>
-        {
-            var tenantInfo = new TenantInfo
-            {
-                TenantId = tenantId
-            };
-            var result = await kofcV1Client.LoginAsync(tenantInfo, loginRequest);
-
-            if (result.StatusCode == HttpStatusCode.OK)
-            {
-                return Results.Ok(result.Data);
-            }
-
-            return Results.Ok(result.Error);
-        })
-            .Produces<LoginResponse>(StatusCodes.Status200OK)
-            .Produces<KofCSDK.Models.ProblemDetails>(StatusCodes.Status400BadRequest)
-            .Produces<KofCSDK.Models.ProblemDetails>(StatusCodes.Status500InternalServerError);
-
-        app.MapGet("nuget/api/{tenantId}/activities", async (
-            [FromRoute] string tenantId,
-            [FromBody] UserAuthentication userAuthentication,
-            IKofCV1Client kofcV1Client,
-            CancellationToken cancellationToken) =>
-        {
-            //return 1;
-            var tenantInfo = new TenantInfo
-            {
-                TenantId = tenantId
-            };
-            var result = await kofcV1Client.GetAllActivities(
-                tenantInfo,
-                userAuthentication);
-
-            if (result.Success)
-            {
-                return Results.Ok(result.Data);
-            }
-
-            return Results.Ok(result.Error);
-        })
-            .Produces<KofCSDK.Models.Responses.Activity>(StatusCodes.Status200OK)
-            .Produces<KofCSDK.Models.ProblemDetails>(StatusCodes.Status500InternalServerError);
     }
 }
