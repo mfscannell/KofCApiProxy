@@ -28,9 +28,11 @@ public static class ApiProxyExtensions
         var requestConfig = new ForwarderRequestConfig { ActivityTimeout = TimeSpan.FromSeconds(100) };
         var transformer = HttpTransformer.Default; // or HttpTransformer.Default;
 
+        var baseUrl = app.Configuration.GetValue<string>("KofCApi:BaseUrl");
+
         app.Map("api/{**catch-all}", async (HttpContext httpContext, IHttpForwarder forwarder) =>
         {
-            var error = await forwarder.SendAsync(httpContext, "http://localhost:9080/",
+            var error = await forwarder.SendAsync(httpContext, baseUrl,
                 httpClient, requestConfig, transformer);
             // Check if the operation was successful
             if (error != ForwarderError.None)

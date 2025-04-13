@@ -9,8 +9,8 @@ public static class ApiProxyExtensionsNugetActivities
     public static void MapApiNugetActivities(this WebApplication app)
     {
         app.MapGet("nuget/api/{tenantId}/{version}/activities", async (
+            HttpContext context,
             [FromRoute] string tenantId,
-            [FromBody] UserAuthentication userAuthentication,
             IKofCV1Client kofcV1Client,
             CancellationToken cancellationToken) =>
         {
@@ -18,9 +18,19 @@ public static class ApiProxyExtensionsNugetActivities
             {
                 TenantId = tenantId
             };
+            var token = context.Request.Headers.Authorization.ToString();
+
+            if (!string.IsNullOrWhiteSpace(token) && token.StartsWith("Bearer "))
+            {
+                token = token.Substring(7);
+            }
+
             var result = await kofcV1Client.GetAllActivities(
                 tenantInfo,
-                userAuthentication,
+                new UserAuthentication
+                {
+                    WebToken = token
+                },
                 cancellationToken);
 
             if (result.Success)
@@ -36,8 +46,9 @@ public static class ApiProxyExtensionsNugetActivities
             .Produces<KofCSDK.Models.ProblemDetails>(StatusCodes.Status500InternalServerError);
 
         app.MapPost("nuget/api/{tenantId}/{version}/activities", async (
+            HttpContext context,
             [FromRoute] string tenantId,
-            [FromBody] AuthenticatedRequest<CreateActivityRequest> request,
+            [FromBody] CreateActivityRequest request,
             IKofCV1Client kofcV1Client,
             CancellationToken cancellationToken) =>
         {
@@ -45,9 +56,23 @@ public static class ApiProxyExtensionsNugetActivities
             {
                 TenantId = tenantId
             };
+            var token = context.Request.Headers.Authorization.ToString();
+
+            if (!string.IsNullOrWhiteSpace(token) && token.StartsWith("Bearer "))
+            {
+                token = token.Substring(7);
+            }
+
             var result = await kofcV1Client.CreateActivity(
                 tenantInfo,
-                request,
+                new AuthenticatedRequest<CreateActivityRequest>
+                {
+                    Payload = request,
+                    UserAuthentication = new UserAuthentication
+                    {
+                        WebToken = token
+                    }
+                },
                 cancellationToken);
 
             if (result.Success)
