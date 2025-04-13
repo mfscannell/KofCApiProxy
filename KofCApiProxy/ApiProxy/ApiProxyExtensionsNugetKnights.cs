@@ -10,8 +10,8 @@ public static class ApiProxyExtensionsNugetKnights
     public static void MapApiNugetKnights(this WebApplication app)
     {
         app.MapGet("nuget/api/{tenantId}/{version}/knights", async (
+            HttpContext context,
             [FromRoute] string tenantId,
-            [FromBody] UserAuthentication userAuthentication,
             IKofCV1Client kofcV1Client,
             CancellationToken cancellationToken) =>
         {
@@ -19,9 +19,19 @@ public static class ApiProxyExtensionsNugetKnights
             {
                 TenantId = tenantId
             };
+            var token = context.Request.Headers.Authorization.ToString();
+
+            if (!string.IsNullOrWhiteSpace(token) && token.StartsWith("Bearer "))
+            {
+                token = token.Substring(7);
+            }
+
             var result = await kofcV1Client.GetAllKnights(
                 tenantInfo,
-                userAuthentication,
+                new UserAuthentication
+                {
+                    WebToken = token,
+                },
                 cancellationToken);
 
             if (result.Success)
