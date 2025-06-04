@@ -1,0 +1,6 @@
+@KofCApiForwarderProxy_HostAddress = http://localhost:5082
+
+GET {{KofCApiForwarderProxy_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

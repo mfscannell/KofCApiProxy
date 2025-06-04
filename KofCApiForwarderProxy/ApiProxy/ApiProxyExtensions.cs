@@ -2,7 +2,7 @@
 using System.Net;
 using Yarp.ReverseProxy.Forwarder;
 
-namespace KofCApiProxy.ApiProxy;
+namespace KofCApiForwarderProxy.ApiProxy;
 
 public static class ApiProxyExtensions
 {

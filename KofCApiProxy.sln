@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KofCApiProxy", "KofCApiProx
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KofCSDK", "KofCSDK\KofCSDK.csproj", "{D9A4C7AB-8B2B-40A6-BC77-01749137687A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KofCApiForwarderProxy", "KofCApiForwarderProxy\KofCApiForwarderProxy.csproj", "{44A8E044-1DDE-4101-9BBB-1E393C6C28AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{D9A4C7AB-8B2B-40A6-BC77-01749137687A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9A4C7AB-8B2B-40A6-BC77-01749137687A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9A4C7AB-8B2B-40A6-BC77-01749137687A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44A8E044-1DDE-4101-9BBB-1E393C6C28AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44A8E044-1DDE-4101-9BBB-1E393C6C28AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44A8E044-1DDE-4101-9BBB-1E393C6C28AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44A8E044-1DDE-4101-9BBB-1E393C6C28AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
