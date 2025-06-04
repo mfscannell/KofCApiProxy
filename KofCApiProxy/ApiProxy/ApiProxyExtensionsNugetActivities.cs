@@ -8,7 +8,7 @@ public static class ApiProxyExtensionsNugetActivities
 {
     public static void MapApiNugetActivities(this WebApplication app)
     {
-        app.MapGet("nuget/api/{tenantId}/{version}/activities", async (
+        app.MapGet("api/{tenantId}/{version}/activities", async (
             HttpContext context,
             [FromRoute] string tenantId,
             IKofCV1Client kofcV1Client,
@@ -45,7 +45,7 @@ public static class ApiProxyExtensionsNugetActivities
             .Produces<List<KofCSDK.Models.Responses.Activity>>(StatusCodes.Status200OK)
             .Produces<KofCSDK.Models.ProblemDetails>(StatusCodes.Status500InternalServerError);
 
-        app.MapPost("nuget/api/{tenantId}/{version}/activities", async (
+        app.MapPost("api/{tenantId}/{version}/activities", async (
             HttpContext context,
             [FromRoute] string tenantId,
             [FromBody] CreateActivityRequest request,

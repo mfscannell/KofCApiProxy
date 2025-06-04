@@ -10,7 +10,7 @@ public static class ApiProxyExtensionsNugetAccounts
 {
     public static void MapApiNugetAccounts(this WebApplication app)
     {
-        app.MapPost("nuget/api/{tenantId}/{version}/accounts/login", async (
+        app.MapPost("api/{tenantId}/{version}/accounts/login", async (
             [FromRoute] string tenantId,
             [FromBody] LoginRequest loginRequest,
             IKofCV1Client kofcV1Client,
@@ -34,7 +34,7 @@ public static class ApiProxyExtensionsNugetAccounts
             .Produces<KofCSDK.Models.ProblemDetails>(StatusCodes.Status400BadRequest)
             .Produces<KofCSDK.Models.ProblemDetails>(StatusCodes.Status500InternalServerError);
 
-        app.MapGet("nuget/api/{tenantId}/{version}/accounts/passwordRequirements", async (
+        app.MapGet("api/{tenantId}/{version}/accounts/passwordRequirements", async (
             HttpContext context,
             [FromRoute] string tenantId,
             IKofCV1Client kofcV1Client,

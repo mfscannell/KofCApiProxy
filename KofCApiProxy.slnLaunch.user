@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "KofCApiProxy\\KofCApiProxy.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "KofCApiForwarderProxy\\KofCApiForwarderProxy.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

@@ -9,7 +9,7 @@ public static class ApiProxyExtensionsNugetKnights
 {
     public static void MapApiNugetKnights(this WebApplication app)
     {
-        app.MapGet("nuget/api/{tenantId}/{version}/knights", async (
+        app.MapGet("api/{tenantId}/{version}/knights", async (
             HttpContext context,
             [FromRoute] string tenantId,
             IKofCV1Client kofcV1Client,
