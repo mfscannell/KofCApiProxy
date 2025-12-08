@@ -4,11 +4,18 @@
     "Projects": [
       {
         "Path": "KofCApiProxy\\KofCApiProxy.csproj",
-        "Action": "Start"
+        "Action": "Start",
+        "DebugTarget": "IIS Express"
       },
       {
         "Path": "KofCApiForwarderProxy\\KofCApiForwarderProxy.csproj",
-        "Action": "Start"
+        "Action": "Start",
+        "DebugTarget": "IIS Express"
+      },
+      {
+        "Path": "KofCApiProducer\\KofCApiProducer.csproj",
+        "Action": "Start",
+        "DebugTarget": "IIS Express"
       }
     ]
   }
